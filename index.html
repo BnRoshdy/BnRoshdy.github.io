@@ -1,23 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" href="images\Strong_Penguin.jpg" type="image/x-icon"/>
-    <title>My Website</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Countdown to November 1, 2025</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #282c34;
+      color: #61dafb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .countdown {
+      font-size: 2rem;
+      letter-spacing: 2px;
+    }
+    .time-segment {
+      display: inline-block;
+      margin: 0 10px;
+      text-align: center;
+    }
+    .number {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    .label {
+      font-size: 1rem;
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+  </style>
 </head>
 <body>
-    <img src="images\Palestine.jpg" alt="Palestine_Flag" 
-    style="width:100%; height:300px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);">
-
-    <div style="display: flex; align-items: center; margin-left: 100px;">
-        <img src="images\Strong_Penguin.jpg" alt="Strong_Penguin" 
-        style="width:150px; height:150px; margin-right:20px; border:200px; border-radius:50%; border:2px solid #000000;">
-        <h1 style="margin: 0;">Mahmoud Roshdy ElMezien</h1>
+  <h1>Countdown to November 1, 2025</h1>
+  <div class="countdown" id="countdown">
+    <div class="time-segment">
+      <div class="number" id="days">0</div>
+      <div class="label">Days</div>
     </div>
-    <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=2119044" style='border:none;'></iframe>
-    <img src="https://tryhackme-badges.s3.amazonaws.com/BnRoshdy.png" alt="Your Image Badge" />
-    <img src="https://tryhackme-badges.s3.amazonaws.com/BnRoshdy.png" alt="Your Image Badge" />
+    <div class="time-segment">
+      <div class="number" id="hours">0</div>
+      <div class="label">Hours</div>
+    </div>
+    <div class="time-segment">
+      <div class="number" id="minutes">0</div>
+      <div class="label">Minutes</div>
+    </div>
+    <div class="time-segment">
+      <div class="number" id="seconds">0</div>
+      <div class="label">Seconds</div>
+    </div>
+  </div>
 
-    <h3>What are you doing in your free time</h3>
+  <script>
+    const countdownDate = new Date('November 1, 2025 00:00:00').getTime();
 
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = countdownDate - now;
+
+      if (distance < 0) {
+        document.getElementById('countdown').innerHTML = "<h2>The date has passed!</h2>";
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
